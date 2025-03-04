@@ -1,0 +1,28 @@
+.content{
+    line-height: 30px;
+    font-size:13px;
+}
+
+#title{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#time_author{
+    text-align: center;
+}
+
+#video{
+    width: 50%;
+}
+
+.news_content{
+    text-indent: 30px;
+}
+
+#editor{
+    display: block;
+    text-align: right;
+}
+
