@@ -1,0 +1,143 @@
+#需求2
+# 1. 查询指定字段 name,entry_date 并设置别名为 姓名、入职日期 并返回
+select name as '姓名', emp.entry_date as '入职日期'
+from emp;
+
+# 2. 查询返回所有字段 （两种写法哦）
+select *
+from emp;
+select id,
+       username,
+       password,
+       name,
+       gender,
+       phone,
+       job,
+       salary,
+       image,
+       entry_date,
+       create_time,
+       update_time
+from emp;
+select id,
+       username,
+       password,
+       name,
+       case
+           when gender = 1 then '男'
+           when gender = 2 then '女'
+           end as gender,
+       phone,
+       job,
+       salary,
+       image,
+       entry_date,
+       create_time,
+       update_time
+from emp;
+
+# 3. 查询性别为女 且 有职位的员工，要求查询出 name,entry_date 并起别名 (姓名、入职日期)
+select name as '姓名', entry_date as '入职日期'
+from emp
+where gender = 2
+  and job is not null;
+select name as '姓名', entry_date as '入职日期'
+from emp
+where gender = 2;
+
+# 4. 查询已有的员工关联了 哪几种 职位(不要重复)
+select distinct job
+from emp;
+
+# 5. 查询 姓名 为 '童威' 或 入职时间在 '2000-01-01' 到 '2010-01-01' 的员工
+select name, entry_date
+from emp
+where name = '童威'
+   or entry_date between '2000-01-01' and '2010-01-01';
+
+# 6. 查询在 薪资小于等于5000 的员工信息
+select name, salary
+from emp
+where salary <= 5000;
+
+# 7. 查询 没有分配职位 的员工信息
+select name, job
+from emp
+where job is null;
+
+# 8. 查询 有职位 的员工信息
+select name, job
+from emp
+where job is not null;
+
+# 9. 查询 密码不等于 '123456' 或 没有职位的员工信息
+select *
+from emp
+where password != '123456' or emp.job is null;
+
+# 10. 查询入职日期 在 '2000-01-01' (包含) 到 '2015-01-01'(包含) 之间的员工信息
+select *
+from emp
+where entry_date between '2000-01-01' and '2015-01-01';
+
+# 11. 查询 入职时间 在 '2000-01-01' (包含) 到 '2015-01-01'(包含) 之间 且 性别为女 的员工信息
+select *
+from emp
+where entry_date between '2000-01-01' and '2015-01-01'
+  and gender = 2;
+
+# 12. 查询 职位是 2 (讲师) 或 3 (学工主管) 或 4 (教研主管) 的员工信息（两种写法实现）
+select *
+from emp
+where job in (2, 3, 4);
+
+select *
+from emp
+where job = '2' or job = '3' or job = '4';
+
+# 13. 查询姓名为两个字 且 性别为男 且 薪资高于5000 的员工信息
+select name, emp.salary
+from emp
+where name like '__'
+  and gender = '1'
+  and salary > 5000;
+
+# 14.查询姓名中包含 '小' 的员工信息  且  入职时间在 '2008-01-01' 之后入职的员工
+select name, entry_date
+from emp
+where name like '%小%'
+  and entry_date > '2008-01-01';
+
+# 15. 查询出 性别为 男 , 或 入职时间在 '2010-01-01' 之后入职的员工
+select name, emp.entry_date
+from emp
+where gender = '1' or entry_date > '2010-01-01';
+
+# 16. 查询有职位的， 且 姓名为两个字 的员工信息
+select *
+from emp
+where job is not null
+  and name like '__';
+
+# 17. 查询所有的性别为男(gender 为 1)的 讲师 (job 为 2) 的员工信息
+select name, gender, job
+from emp
+where gender = '1'
+  and job = '2';
+
+# 18. 查询薪资小于 8000 或 入职时间在 2010-10-09 之后入职的员工信息
+select *
+from emp
+where salary < 8000 or entry_date > '2010-10-09';
+
+# 19. 根据性别分组 , 统计男性和女性员工的数量
+select gender, count(gender)
+from emp
+group by gender;
+
+# 22. 先查询入职时间在 '2015-01-01' (包含) 以前的员工 , 并对结果根据职位分组 , 获取员工数量大于等于2的职位
+select job, count(job)
+from emp
+where entry_date <= '2015-01-01'
+group by job
+having count(job) > 2;

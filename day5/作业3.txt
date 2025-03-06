@@ -1,0 +1,21 @@
+#作业3
+create table dept
+(
+    id          int unsigned primary key auto_increment comment '序号',
+    dept_name   varchar(20) unique not null comment '部门名称',
+    create_time datetime           not null comment '创建时间',
+    update_time datetime           not null comment '最后操作时间'
+) comment '部门表';
+
+create table clazz
+(
+    id              int unsigned primary key auto_increment comment '序号',
+    clazz_name      varchar(20) unique not null comment '班级名称',
+    clazzroom       varchar(10) unique not null comment '班级教室',
+    curriculum_time datetime           not null comment '开课时间',
+    finishing_time  datetime           not null comment '结课时间',
+    status          tinyint unsigned   not null comment '状态 0-未开班;1-在读',
+    subject         tinyint unsigned   not null comment '学科 1-Java;2-前端;3-大数据;4-pyhton;5-go;6-嵌入式',
+    create_time     datetime           not null comment '创建时间',
+    update_time     datetime           not null comment '最后操作时间'
+) comment '班级表';
